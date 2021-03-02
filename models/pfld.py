@@ -99,7 +99,7 @@ class PFLDInference(nn.Module):
         self.avg_pool2 = nn.AvgPool2d(7)
         self.fc = nn.Linear(176, 196)
 
-    def forward(self, x):  # x: 3, 112, 112
+    def forward(self, x: torch.Tensor):  # x: 3, 112, 112
         x = self.relu(self.bn1(self.conv1(x)))  # [64, 56, 56]
         x = self.relu(self.bn2(self.conv2(x)))  # [64, 56, 56]
         x = self.conv3_1(x)

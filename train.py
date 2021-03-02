@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
 import argparse
 import logging
@@ -93,8 +93,7 @@ def validate(wlfw_val_dataloader, pfld_backbone, auxiliarynet, criterion):
 def main(args):
     # Step 1: parse args config
     logging.basicConfig(
-        format=
-        '[%(asctime)s] [p%(process)s] [%(pathname)s:%(lineno)d] [%(levelname)s] %(message)s',
+        format='[%(asctime)s] [p%(process)s] [%(pathname)s:%(lineno)d] [%(levelname)s] %(message)s',
         level=logging.INFO,
         handlers=[
             logging.FileHandler(args.log_file, mode='w'),
@@ -111,8 +110,8 @@ def main(args):
     }, {
         'params': auxiliarynet.parameters()
     }],
-                                 lr=args.base_lr,
-                                 weight_decay=args.weight_decay)
+        lr=args.base_lr,
+        weight_decay=args.weight_decay)
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
         optimizer, mode='min', patience=args.lr_patience, verbose=True)
     if args.resume:
@@ -168,8 +167,9 @@ def parse_args():
     parser = argparse.ArgumentParser(description='pfld')
     # general
     parser.add_argument('-j', '--workers', default=0, type=int)
-    parser.add_argument('--devices_id', default='0', type=str)  #TBD
-    parser.add_argument('--test_initial', default='false', type=str2bool)  #TBD
+    parser.add_argument('--devices_id', default='0', type=str)  # TBD
+    parser.add_argument('--test_initial', default='false',
+                        type=str2bool)  # TBD
 
     # training
     ##  -- optimizer

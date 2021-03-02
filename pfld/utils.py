@@ -4,8 +4,8 @@ import math
 
 
 def calculate_pitch_yaw_roll(landmarks_2D,
-                             cam_w=256,
-                             cam_h=256,
+                             cam_w: int = 256,
+                             cam_h: int = 256,
                              radians=False):
     """ Return the the pitch  yaw and roll angles associated with the input image.
     @param radians When True it returns the angle in radians, otherwise in degrees.
@@ -18,9 +18,9 @@ def calculate_pitch_yaw_roll(landmarks_2D,
     c_y = cam_h / 2
     f_x = c_x / np.tan(60 / 2 * np.pi / 180)
     f_y = f_x
-    camera_matrix = np.float32([[f_x, 0.0, c_x], [0.0, f_y, c_y],
-                                [0.0, 0.0, 1.0]])
-    camera_distortion = np.float32([0.0, 0.0, 0.0, 0.0, 0.0])
+    camera_matrix = np.array([[f_x, 0.0, c_x], [0.0, f_y, c_y],
+                              [0.0, 0.0, 1.0]], dtype=np.float32)
+    camera_distortion = np.array([0.0, 0.0, 0.0, 0.0, 0.0], dtype=np.float32)
 
     # dlib (68 landmark) trached points
     # TRACKED_POINTS = [17, 21, 22, 26, 36, 39, 42, 45, 31, 35, 48, 54, 57, 8]
@@ -31,8 +31,8 @@ def calculate_pitch_yaw_roll(landmarks_2D,
     # OpenCV uses the reference usually used in computer vision:
     # X points to the right, Y down, Z to the front
     landmarks_3D = np.float32([
-        [6.825897, 6.760612, 4.402142],  # LEFT_EYEBROW_LEFT, 
-        [1.330353, 7.122144, 6.903745],  # LEFT_EYEBROW_RIGHT, 
+        [6.825897, 6.760612, 4.402142],  # LEFT_EYEBROW_LEFT,
+        [1.330353, 7.122144, 6.903745],  # LEFT_EYEBROW_RIGHT,
         [-1.330353, 7.122144, 6.903745],  # RIGHT_EYEBROW_LEFT,
         [-6.825897, 6.760612, 4.402142],  # RIGHT_EYEBROW_RIGHT,
         [5.311432, 5.485328, 3.987654],  # LEFT_EYE_LEFT,
@@ -70,6 +70,7 @@ def calculate_pitch_yaw_roll(landmarks_2D,
 
 class AverageMeter(object):
     """Computes and stores the average and current value"""
+
     def __init__(self):
         self.reset()
 
