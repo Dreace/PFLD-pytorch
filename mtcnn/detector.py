@@ -1,4 +1,3 @@
-from __future__ import print_function
 import cv2
 import math
 import os
@@ -36,10 +35,9 @@ def nms(boxes, overlap_threshold=0.5, mode='union'):
         elif mode == 'union':
             overlap = inter / (area[i] + area[ids[:last]] - inter)
 
-        ids = np.delete(
-            ids,
-            np.concatenate([[last],
-                            np.where(overlap > overlap_threshold)[0]]))
+        ids = np.delete(ids,
+                        np.concatenate([[last],
+                                        np.where(overlap > overlap_threshold)[0]]))
     return pick
 
 

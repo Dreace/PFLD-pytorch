@@ -16,7 +16,7 @@ def main(args):
 
     checkpoint = torch.load(args.model_path, map_location=device)
     pfld_backbone = PFLDInference().to(device)
-    pfld_backbone.load_state_dict(checkpoint['plfd_backbone'])
+    pfld_backbone.load_state_dict(checkpoint['pfld_backbone'])
     pfld_backbone.eval()
     pfld_backbone = pfld_backbone.to(device)
     transform = torchvision.transforms.Compose(
@@ -25,7 +25,8 @@ def main(args):
     cap = cv2.VideoCapture(0)
     while True:
         ret, img = cap.read()
-        if not ret: break
+        if not ret:
+            break
         height, width = img.shape[:2]
         bounding_boxes, landmarks = detect_faces(img)
         for box in bounding_boxes:
@@ -65,10 +66,10 @@ def main(args):
                 -1, 2) * [size, size] - [edx1, edy1]
 
             for (x, y) in pre_landmark.astype(np.int32):
-                cv2.circle(img, (x1 + x, y1 + y), 1, (0, 0, 255))
+                cv2.circle(img, (x1 + x, y1 + y), 1, (64, 58, 229))
 
         cv2.imshow('face_landmark_68', img)
-        if cv2.waitKey(10) == 27:
+        if cv2.waitKey(1) == 27:
             break
 
 

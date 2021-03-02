@@ -144,12 +144,11 @@ def main(args):
                                                 optimizer, epoch)
         filename = os.path.join(str(args.snapshot),
                                 "checkpoint_epoch_" + str(epoch) + '.pth.tar')
-        save_checkpoint(
-            {
-                'epoch': epoch,
-                'pfld_backbone': pfld_backbone.state_dict(),
-                'auxiliarynet': auxiliarynet.state_dict()
-            }, filename)
+        save_checkpoint({
+            'epoch': epoch,
+            'pfld_backbone': pfld_backbone.state_dict(),
+            'auxiliarynet': auxiliarynet.state_dict()
+        }, filename)
 
         val_loss = validate(wlfw_val_dataloader, pfld_backbone, auxiliarynet,
                             criterion)
